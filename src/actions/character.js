@@ -1,9 +1,9 @@
-import CharacterService from '../services/character.service'
+import createCharacterService from '../services/createCharacterService'
 
-export const fetchCharacter = name => dispatch => {
+export const fetchCharacter = name => (dispatch, getState) => {
   dispatch({type: 'FETCH_CHARACTER_START'})
 
-  CharacterService.getCharacter(name)
+  createCharacterService(getState().auth.token).getCharacter(name)
     .then(c => dispatch({type: 'FETCH_CHARACTER_SUCCESS', payload: c}))
     .catch(e => dispatch({type: 'FETCH_CHARACTER_ERROR', payload: e}))
 }
