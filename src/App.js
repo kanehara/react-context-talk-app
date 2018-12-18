@@ -35,7 +35,7 @@ class App extends Component {
                 </button>
                 <Switch>
                   <Route exact path="/" component={HomeRoute} />
-                  <Route exact path="/characters/:name" component={CharacterDetailRoute} />
+                  <Route exact path="/characters/:name" render={() => <CharacterDetailRoute favoriteCharacter={this.state.auth.favoriteCharacter} />} />
                   <Redirect to="/" />
                 </Switch>
               </React.Fragment>
