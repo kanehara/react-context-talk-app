@@ -4,28 +4,27 @@ import HomeRoute from './HomeRoute';
 import LoginRoute from './LoginRoute';
 import CharacterDetailRoute from './CharacterDetailRoute';
 import LoginService from './services/login.service'
+import { connect } from 'react-redux'
+import {setAuthAction, unsetAuthAction} from './actions/auth'
+
 
 class App extends Component {
-  state = {
-    auth: null
-  }
-
   handleLoginSubmit = e => {
     const formData = new FormData(e.target)
     LoginService.authenticate(formData.get('username'), formData.get('password'))
-      .then(auth => this.setState({auth}))
-      .catch(() => this.setState({auth: null}))
+      .then(auth => this.props.dispatch(setAuthAction(auth)))
+      .catch(() => this.props.dispatch(unsetAuthAction()))
   }
 
   handleLogoutClick = () => {
-    this.setState({auth: null})
+    this.props.dispatch(unsetAuthAction())
   }
 
   render() {
     return (
       <Router>
         <div className="App">
-          {this.state.auth 
+          {this.props.auth 
             ? (
               <React.Fragment>
                 <button style={{position: 'fixed', right: '50px', top: '20px'}} 
@@ -35,7 +34,7 @@ class App extends Component {
                 </button>
                 <Switch>
                   <Route exact path="/" component={HomeRoute} />
-                  <Route exact path="/characters/:name" render={() => <CharacterDetailRoute favoriteCharacter={this.state.auth.favoriteCharacter} />} />
+                  <Route exact path="/characters/:name" render={CharacterDetailRoute} />
                   <Redirect to="/" />
                 </Switch>
               </React.Fragment>
@@ -48,9 +47,9 @@ class App extends Component {
             )
           }
         </div>
-      </Router>  
-    );
+      </Router>
+  );
   }
 }
 
-export default App;
+export default connect(state => ({ auth: state.auth }))(App);

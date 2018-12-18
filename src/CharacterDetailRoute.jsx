@@ -1,6 +1,7 @@
 import React from 'react'
 import CharacterService from './services/character.service'
 import {withRouter} from 'react-router'
+import {connect} from 'react-redux'
 
 class CharacterDetailRoute extends React.Component {
   state = {
@@ -22,7 +23,7 @@ class CharacterDetailRoute extends React.Component {
     if (!character) return <h3>404 Not found</h3>
     return (
       <React.Fragment>
-        {this.props.favoriteCharacter === character.name && <h3>*** Your favorite! ***</h3>}
+        {this.props.auth.favoriteCharacter === character.name && <h3>*** Your favorite! ***</h3>}
         <h1>{character.name}</h1>
         <h2>Special skill: {character.specialSkill}</h2>
         <p>{character.bio}</p>
@@ -32,4 +33,4 @@ class CharacterDetailRoute extends React.Component {
   }
 }
 
-export default withRouter(CharacterDetailRoute)
+export default withRouter(connect(state => ({auth: state.auth}))(CharacterDetailRoute))
