@@ -1,25 +1,17 @@
 import React from 'react'
-import CharacterService from './services/character.service'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
+import {fetchCharacter} from './actions/character'
 
 class CharacterDetailRoute extends React.Component {
-  state = {
-    loading: false,
-    character: null
-  }
-
   componentDidMount () {
-    this.setState({loading: true})
-    CharacterService.getCharacter(this.props.match.params.name)
-      .then(character => this.setState({character}))
-      .finally(() => this.setState({loading: false}))
+    this.props.dispatch(fetchCharacter(this.props.match.params.name))
   }
 
   render () {
-    if (this.state.loading) return <h3>Loading...</h3>
+    // if (this.props.character.loading) return <h3>Loading...</h3>
 
-    const {character} = this.state
+    const {character} = this.props.character
     if (!character) return <h3>404 Not found</h3>
     return (
       <React.Fragment>
@@ -33,4 +25,7 @@ class CharacterDetailRoute extends React.Component {
   }
 }
 
-export default withRouter(connect(state => ({auth: state.auth}))(CharacterDetailRoute))
+export default withRouter(connect(state => ({
+  auth: state.auth,
+  character: state.character
+}))(CharacterDetailRoute))

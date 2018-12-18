@@ -1,13 +1,9 @@
-const initialState = {
-  auth: null
-}
-
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = null, action) => {
   switch (action.type) {
     case 'SET_AUTHENTICATION':
-      return { auth: action.payload }
+      return action.payload
     case 'UNSET_AUTHENTICATION':
-      return { auth: null }
+      return null
     default:
       return state
   }
