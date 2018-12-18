@@ -4,7 +4,7 @@ import HomeRoute from './HomeRoute';
 import LoginRoute from './LoginRoute';
 import CharacterDetailRoute from './CharacterDetailRoute';
 import LoginService from './services/login.service'
-
+import AuthContext from './AuthContext'
 class App extends Component {
   state = {
     auth: null
@@ -27,22 +27,18 @@ class App extends Component {
         <div className="App">
           {this.state.auth 
             ? (
-              <React.Fragment>
+              <AuthContext.Provider value={this.state.auth}>
                 <button style={{position: 'fixed', right: '50px', top: '20px'}} 
                   onClick={this.handleLogoutClick}
                 >
                   Logout
                 </button>
                 <Switch>
-                  <Route exact path="/" component={() => <HomeRoute token={this.state.auth.token} />} />
-                  <Route exact path="/characters/:name" render={() => 
-                    <CharacterDetailRoute 
-                      token={this.state.auth.token} 
-                      favoriteCharacter={this.state.auth.favoriteCharacter} />} 
-                  />
+                  <Route exact path="/" component={HomeRoute} />
+                  <Route exact path="/characters/:name" render={CharacterDetailRoute} />
                   <Redirect to="/" />
                 </Switch>
-              </React.Fragment>
+              </AuthContext.Provider>
             )
             : (
               <Switch>

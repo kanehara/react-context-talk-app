@@ -3,6 +3,7 @@ import './App.css'
 import CharacterChooser from './CharacterChooser'
 import Character from './Character'
 import createCharacterService from './services/createCharacterService'
+import AuthContext from './AuthContext'
 
 class HomeRoute extends Component {
   state = {
@@ -11,9 +12,11 @@ class HomeRoute extends Component {
     characters: []
   }
 
+  static contextType = AuthContext
+
   componentDidMount () {
     this.setState({loading: true})
-    createCharacterService(this.props.token).getCharacters()
+    createCharacterService(this.context.token).getCharacters()
       .then(c => this.setState({characters: c}))
       .finally(() => this.setState({loading: false}))
   }
