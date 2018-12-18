@@ -1,12 +1,16 @@
 import React from 'react'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
-import {fetchCharacter} from './actions/character'
+import {fetchCharacter, clearCharacter} from './actions/character'
 
 class CharacterDetailRoute extends React.Component {
   componentDidMount () {
     this.props.dispatch(fetchCharacter(this.props.match.params.name))
   }
+
+  // componentWillUnmount () {
+  //   this.props.dispatch(clearCharacter())
+  // }
 
   render () {
     // if (this.props.character.loading) return <h3>Loading...</h3>
