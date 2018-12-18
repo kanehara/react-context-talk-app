@@ -1,5 +1,5 @@
 import React from 'react'
-import CharacterService from './services/character.service'
+import createCharacterService from './services/createCharacterService'
 import {withRouter} from 'react-router'
 
 class CharacterDetailRoute extends React.Component {
@@ -10,7 +10,7 @@ class CharacterDetailRoute extends React.Component {
 
   componentDidMount () {
     this.setState({loading: true})
-    CharacterService.getCharacter(this.props.match.params.name)
+    createCharacterService(this.props.token).getCharacter(this.props.match.params.name)
       .then(character => this.setState({character}))
       .finally(() => this.setState({loading: false}))
   }

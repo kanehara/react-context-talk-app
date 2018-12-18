@@ -34,8 +34,12 @@ class App extends Component {
                   Logout
                 </button>
                 <Switch>
-                  <Route exact path="/" component={HomeRoute} />
-                  <Route exact path="/characters/:name" render={() => <CharacterDetailRoute favoriteCharacter={this.state.auth.favoriteCharacter} />} />
+                  <Route exact path="/" component={() => <HomeRoute token={this.state.auth.token} />} />
+                  <Route exact path="/characters/:name" render={() => 
+                    <CharacterDetailRoute 
+                      token={this.state.auth.token} 
+                      favoriteCharacter={this.state.auth.favoriteCharacter} />} 
+                  />
                   <Redirect to="/" />
                 </Switch>
               </React.Fragment>

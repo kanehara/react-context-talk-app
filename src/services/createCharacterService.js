@@ -75,7 +75,7 @@ const CHARACTERS = [
 
 const SELECTED_CHARACTERS = []
 
-const characterService = {
+const createCharacterService = token => ({
   getCharacters: () => new Promise(resolve => setTimeout(() => resolve(CHARACTERS), 750)),
   getCharacter: name => new Promise(resolve => setTimeout(() => resolve(CHARACTERS.find(c => c.name === name)), 750)),
   getSelectedCharacters: () => new Promise(resolve => setTimeout(() => resolve(SELECTED_CHARACTERS), 750)),
@@ -83,6 +83,6 @@ const characterService = {
     SELECTED_CHARACTERS.push(c)
     resolve(SELECTED_CHARACTERS)
   })
-}
+})
 
-export default characterService
+export default createCharacterService

@@ -1,11 +1,13 @@
 const USERS = {
   morty: {
     password: 'jessica',
-    favoriteCharacter: 'Bird Person'
+    favoriteCharacter: 'Bird Person',
+    token: 'mortytoken'
   },
   rick: {
     password: 'c137',
-    favoriteCharacter: 'Snoop Snoop'
+    favoriteCharacter: 'Snoop Snoop',
+    token: 'ricktoken'
   }
 }
 

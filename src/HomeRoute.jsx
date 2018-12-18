@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import CharacterChooser from './CharacterChooser'
 import Character from './Character'
-import CharacterService from './services/character.service'
+import createCharacterService from './services/createCharacterService'
 
 class HomeRoute extends Component {
   state = {
@@ -13,7 +13,7 @@ class HomeRoute extends Component {
 
   componentDidMount () {
     this.setState({loading: true})
-    CharacterService.getCharacters()
+    createCharacterService(this.props.token).getCharacters()
       .then(c => this.setState({characters: c}))
       .finally(() => this.setState({loading: false}))
   }
