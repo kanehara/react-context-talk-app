@@ -54,8 +54,8 @@ const CHARACTERS = [
     specialSkill: 'Saying b*tch before killing'
   },
   {
-    name: 'Snoop Snoop', 
-    imgSrc: '/SnoopSnoop.png',
+    name: 'Noop Noop', 
+    imgSrc: '/NoopNoop.png',
     bio: 'The Vindicators special helper',
     specialSkill: 'Cleaning poop'
   },
