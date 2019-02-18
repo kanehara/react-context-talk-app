@@ -6,7 +6,7 @@ const USERS = {
   },
   rick: {
     password: 'c137',
-    favoriteCharacter: 'Snoop Snoop',
+    favoriteCharacter: 'Noop Noop',
     token: 'ricktoken'
   }
 }
